@@ -1,0 +1,5 @@
+discord.py was installed through github. Make sure to install the following way:
+
+$ git clone https://github.com/Rapptz/discord.py
+$ cd discord.py
+$ python3 -m pip install -U .[voice]
