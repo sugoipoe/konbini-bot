@@ -1,11 +1,11 @@
 import requests
 
-def convert_to_audio(message: str):
+def convert_to_audio(message: str, speaker: int = 1):
     # First API call - Generate the query JSON blob from the input message
     query_url = 'http://100.97.70.91:50020/audio_query'
     query_params = {
         'text': message,
-        'speaker': 2
+        'speaker': speaker
     }
     headers = {'accept': 'application/json'}
     response = requests.post(query_url, params=query_params, headers=headers)
@@ -15,6 +15,8 @@ def convert_to_audio(message: str):
         return
 
     query_json = response.json()
+    query_json["intonationScale"] = 1.8
+    query_json["speedScale"] = 1.3
 
     # Second API call - Convert the JSON blob to audio using the synthesis endpoint
     synthesis_url = 'http://100.97.70.91:50020/synthesis?speaker=2&enable_interrogative_upspeak=true'
