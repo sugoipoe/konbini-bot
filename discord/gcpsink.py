@@ -6,10 +6,10 @@ import time
 import wave
 
 """
-There is a GcpSink for each guild_id the bot is in.
+There is a GcpSink for each voice channel the bot is in.
 """
 class GcpSink(voice_recv.AudioSink):
-    def __init__(self, response_coro, guild_id, buffer_size=1024, config=None):
+    def __init__(self, response_coro, vc, buffer_size=1024, config=None):
         super().__init__()
         self.buffer_size = buffer_size
         self.buffer = deque(maxlen=self.buffer_size)
@@ -20,8 +20,11 @@ class GcpSink(voice_recv.AudioSink):
             "audio_channel_count": 2,
             "enable_word_time_offsets": True, # Enable for debugging
         }
+        # response_coro is a coroutine that is executed when the user is done speaking.
+        # For this particular sink, that is when the user releases the PTT button.
+        # Check monitor_buffer for the details.
         self.response_coro = response_coro
-        self.guild_id = guild_id
+        self.vc = vc
 
         # Buffer monitoring properties
         self.last_update_time = None
@@ -41,7 +44,7 @@ class GcpSink(voice_recv.AudioSink):
         audio_buffer = b"".join(self.buffer)
         self.buffer.clear()
         transcription_result = self.transcribe_audio(audio_buffer)
-        await self.response_coro(transcription_result, self.guild_id)
+        await self.response_coro(transcription_result, self.vc)
 
     # Used to determine when the user releases the PTT button
     async def monitor_buffer(self):
