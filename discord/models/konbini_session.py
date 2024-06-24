@@ -72,6 +72,14 @@ class KonbiniSession(SessionData):
 
         await channel.send(self.current_state.prompt)
 
+    def continue_text_session(self):
+        # If the current state is the checkout state, we return False to indicate to the caller
+        # that we want to terminate the loop.
+        if self.current_state.name == "checkout":
+            return False
+        else:
+            return True
+
     async def handle_inspect_state(self, user_choice, channel):
         # If the user chooses to keep the item, add it to the inventory
         if self.current_state.options[user_choice] == "keep":

@@ -119,10 +119,12 @@ async def updated_handle_konbini_scenario(channel, user):
 
     # Start the level
     while True:
+        # prompt_user will return False when we are in the checkout state
         await konbini_session.prompt_user(channel)
-        response = await bot.wait_for('message')
+        if not konbini_session.continue_text_session():
+            break
+        response = await bot.wait_for('message', check=lambda m: m.author == user and m.channel == channel)
         await konbini_session.handle_response(response, channel)
-
 
 async def handle_konbini_scenario(channel, user):
     # Ensure you have the correct channel type for sending messages
@@ -249,7 +251,7 @@ async def on_voice_state_update(member, before, after):
                                          voice_client)
         
         await start_listening(voice_client)
-        await manage_session(member, voice_client)
+        await manage_voice_session(member, voice_client)
     
     # Bot will leave the channel once the user disconnects
     if before.channel and not after.channel and member.guild.voice_client:
@@ -339,7 +341,7 @@ async def respond_to_user(user_message, voice_client):
         Takes a message from the user, gets a response from gpt, converts it to spoken audio, and finally
         will play the message in the channel.
 
-        Returns the response from GPT -- we are doing this for now because we manage_session
+        Returns the response from GPT -- we are doing this for now because we manage_voice_session
         needs to know when to end the session. In most cases, we'll probably ignore it.
     """
     print(f"Responding to message: {user_message}")
@@ -352,7 +354,7 @@ async def respond_to_user(user_message, voice_client):
 
 
 ### Infra functions -- these manage the user and bot's presence in the channel. ###
-async def manage_session(user, voice_client):
+async def manage_voice_session(user, voice_client):
     # For now, all this does is watch for ありがとう and ends the call when it shows.
     # This function will manage the session for the user. It will keep track of the user's progress
     # through the scenario, and will handle the text channel.
@@ -361,7 +363,7 @@ async def manage_session(user, voice_client):
 
     while True:
         channel = discord.utils.get(user.guild.text_channels, name='konbini-test')
-        message = await bot.wait_for('message', check=lambda message: message.channel == channel)
+        message = await bot.wait_for('message', check=lambda message: message.channel == channel and message.author != bot.user)
         # Process the message here
         response = await respond_to_user(message.content, voice_client)
         # Possible bug -- what if the user says it first?
