@@ -75,7 +75,7 @@ async def on_reaction_add(reaction, user):
         return
 
     reaction_handlers = {
-        '7eleven': updated_handle_konbini_scenario
+        '7eleven': handle_konbini_scenario
     }
 
     reaction_name = reaction.emoji.name
@@ -84,7 +84,7 @@ async def on_reaction_add(reaction, user):
     await handler_function(reaction.message.channel, user)
 
 
-async def updated_handle_konbini_scenario(channel, user):
+async def handle_konbini_scenario(channel, user):
     # This function is called once the user reacts "konbini" to the "which scenario" prompt
     async def prompt_user(prompt_type):
         # Some prompts are re-usable, so we'll store them here.
@@ -125,83 +125,6 @@ async def updated_handle_konbini_scenario(channel, user):
             break
         response = await bot.wait_for('message', check=lambda m: m.author == user and m.channel == channel)
         await konbini_session.handle_response(response, channel)
-
-async def handle_konbini_scenario(channel, user):
-    # Ensure you have the correct channel type for sending messages
-    if isinstance(channel, discord.TextChannel) or isinstance(channel, discord.DMChannel):
-        # Set up images first
-        # Path to your image file
-        images = {
-            'onigiri': 'images/onigiri.jpeg',
-            'cup_soup': 'images/cup_soup.jpeg',
-            'alcohol': 'images/alcohol.jpeg',
-            'chocolate': 'images/chocolate.jpeg',
-            'coffee': 'images/coffee.webp',
-            'cup_ramen': 'images/cup_ramen.webp',
-            'curry_meal': 'images/curry_meal.jpeg',
-            'fruit_sando': 'images/fruit_sando.jpeg',
-            'potato_chips': 'images/potato_chips.webp',
-            'salad': 'images/salad.jpeg',
-        }
-        image_files = [File(image_path) for image_path in images.values()]
-
-        # Ask the user for what they want
-        await channel.send(f"{user.mention}, you've selected the konbini scenario. What items would you like to purchase?",
-                           files=image_files)
-
-        items_dict = {
-            'A': 'Onigiri',
-            'B': 'Seaweed & tofu soup',
-            'C': 'Beer',
-            'D': 'Chocolate',
-            'E': 'Coffee',
-            'F': 'Cup ramen',
-            'G': 'Katsu curry',
-            'H': 'Fruit sandwich',
-            'I': 'Potato chips',
-            'J': 'Salad'
-        }
-
-        items_string = "\n".join([f"{key}: {value}" for key, value in items_dict.items()])
-        await channel.send(items_string)
-
-        def check(m):
-            # Check that the response is from the same user and channel as the command invocation
-            return m.author == user and m.channel == channel
-
-        try:
-            # Wait for a response from the user
-            message = await bot.wait_for('message', timeout=30.0, check=check)
-
-            # Process the user's response
-            selected_item_codes = message.content.upper().split(', ')
-            selected_items = ",".join([items_dict.get(item_code) for item_code in selected_item_codes if item_code in items_dict])
-
-            # Build a response based on the selected items
-            response = "You've selected:\n"
-            for item in selected_item_codes:
-                if item in items_dict:
-                    response += f"- {items_dict[item]}\n"
-
-            # Send the response to the user
-            await channel.send(response)
-
-            channel_name = channel.name
-            await channel.send(f"When are you ready to check out, join the {channel_name} channel.")
-            await channel.send("Once you join the channel, please wait for konbini-bot to start the conversation!")
-
-            # Create the KonbiniSession to track this session
-            konbini_session = KonbiniSession(
-                user=user,
-                items=[selected_items]
-            )
-            # TODO: Don't forget to remove the user from sessions when we're done!
-            sessions[channel_name] = konbini_session
-
-        except asyncio.TimeoutError:
-            await channel.send("Sorry, you took too long to respond!")
-
-        return
 
 
 @bot.event
