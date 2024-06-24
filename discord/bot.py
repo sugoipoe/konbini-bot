@@ -75,13 +75,53 @@ async def on_reaction_add(reaction, user):
         return
 
     reaction_handlers = {
-        '7eleven': handle_konbini_scenario
+        '7eleven': updated_handle_konbini_scenario
     }
 
     reaction_name = reaction.emoji.name
 
     handler_function = reaction_handlers.get(reaction_name)
     await handler_function(reaction.message.channel, user)
+
+
+async def updated_handle_konbini_scenario(channel, user):
+    # This function is called once the user reacts "konbini" to the "which scenario" prompt
+    async def prompt_user(prompt_type):
+        # Some prompts are re-usable, so we'll store them here.
+        if prompt_type == "pick_difficulty":
+            await channel.send("Konbini? Pick your difficulty (easy, medium, hard)")
+        elif prompt_type == "print_objectives":
+            await channel.send("Generating konbini...\n"
+                    "Welcome to 7/11. いらっしゃいませ！\n"
+                    "It's a busy day of sightseeing today! Let's get a good start to the day.\n"
+                    "🎯 Buy an ebi onigiri\n" 
+                    "🎯 Buy a can of hot coffee\n" 
+                    "🎯 Get a bag from the clerk\n"
+                    "Good luck! がんばって！"
+                )
+
+    # Ask for difficulty
+    await prompt_user("pick_difficulty")
+    difficulty_response = await bot.wait_for('message', check=lambda m: m.author == user and m.content.lower() in ['easy', 'intermediate', 'difficult'])
+    difficulty = difficulty_response.content.lower()
+
+
+    konbini_session = KonbiniSession(
+        user=user,
+        difficulty=difficulty
+    )
+    # TODO: Don't forget to remove the user from sessions when we're done!
+    sessions[channel.name] = konbini_session
+
+    # initialize and show the objectives to the user
+    konbini_session.initialize_mission()
+    await prompt_user("print_objectives")
+
+    # Start the level
+    while True:
+        await konbini_session.prompt_user(channel)
+        response = await bot.wait_for('message')
+        await konbini_session.handle_response(response, channel)
 
 
 async def handle_konbini_scenario(channel, user):
@@ -197,13 +237,13 @@ async def on_voice_state_update(member, before, after):
 
         # Depending on the session type, do some pre-work
         # TODO: Might be cool to write a .start_session method for each type of sessionData
-        session_data = sessions.get(voice_channel.name)
-        if session_data.__class__ is KonbiniSession:
+        session = sessions.get(voice_channel.name)
+        if session.__class__ is KonbiniSession:
             # send the item list and play the result.
-            item_list = ",".join(session_data.items)
+            item_list = ",".join(session.mission.inventory)
             item_list_message = f"items: {item_list}"
             logging.log(logging.INFO, f"Sending item list message: {item_list_message}")
-            gpt_response = await ask_gpt_session(item_list_message, session_data)
+            gpt_response = await ask_gpt_session(item_list_message, session)
             await play_and_transcribe_response(item_list_message, 
                                          gpt_response,
                                          voice_client)
@@ -245,23 +285,6 @@ async def start_listening(voice_client):
     return
 
 
-async def manage_session(user, voice_client):
-    # This function will manage the session for the user. It will keep track of the user's progress
-    # through the scenario, and will handle the text channel.
-
-    # TODO: This only works for konbini sessions. Need to add additional session types.
-
-    while True:
-        channel = discord.utils.get(user.guild.text_channels, name='konbini-test')
-        message = await bot.wait_for('message', check=lambda message: message.channel == channel)
-        # Process the message here
-        response = await respond_to_user(message.content, voice_client)
-        if "ありがとう" in response:
-            await end_session(user, voice_client.channel, voice_client)
-            break
-
-    return
-
 async def play_and_transcribe_response(prompt: str, response: str, voice_client: VoiceClient) -> None:
     """
     Convenience function to play the response and transcribe it to the text channel.
@@ -272,10 +295,11 @@ async def play_and_transcribe_response(prompt: str, response: str, voice_client:
 
     return
 
+
 async def play_response(response, voice_client):
     # Plays the response -- also runs a voice changer
     session = sessions.get(voice_client.channel.name)
-    response_count = len(session.chat_history)
+    response_count = len(session.get_chat_history())
     username = session.user.name
     response_filename = os.path.join(BASE_AUDIO_DIR, str(datetime.date.today()), username, f"response{response_count}.wav")
     os.makedirs(os.path.dirname(response_filename), exist_ok=True)
@@ -326,7 +350,28 @@ async def respond_to_user(user_message, voice_client):
 
     return gpt_response
 
+
 ### Infra functions -- these manage the user and bot's presence in the channel. ###
+async def manage_session(user, voice_client):
+    # For now, all this does is watch for ありがとう and ends the call when it shows.
+    # This function will manage the session for the user. It will keep track of the user's progress
+    # through the scenario, and will handle the text channel.
+
+    # TODO: This only works for konbini sessions. Need to add additional session types.
+
+    while True:
+        channel = discord.utils.get(user.guild.text_channels, name='konbini-test')
+        message = await bot.wait_for('message', check=lambda message: message.channel == channel)
+        # Process the message here
+        response = await respond_to_user(message.content, voice_client)
+        # Possible bug -- what if the user says it first?
+        if "ありがとう" in response:
+            await end_session(user, voice_client.channel, voice_client)
+            break
+
+    return
+
+
 async def end_session(user, voice_channel, voice_client):
     # Remove the user from the session
     sessions.pop(voice_channel.name)
@@ -358,7 +403,7 @@ async def chat(ctx, *, message: str):  # The '*' indicates that 'message' will c
 
     # TODO: This is mega messed up LOL
     # ask_gpt will write an audio file to audio.wav. The bot plays that audio back here.
-    convert_to_audio(gpt_response)
+    play_response(gpt_response, ctx.voice_client)
     await ctx.invoke(bot.get_command('play_sample'))
 
     # Print the response in the chat
