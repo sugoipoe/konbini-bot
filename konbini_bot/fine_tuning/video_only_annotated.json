@@ -1,0 +1,383 @@
+[
+    EX1
+    {
+        "prompt": "items: smoothie",
+        "completion": "て：いらっしゃいませ。はい、１５８円でございます"
+    },
+    {
+        "prompt": "items: smoothie\nて：いらっしゃいませ。はい、１５８円でございます\nお：スイカで",
+        "completion": "て：ありがとうございます"
+    },
+    EX2
+    {
+        "prompt": "items: onigiri, potato chips, fruit sando",
+        "completion": "て：いらっしゃいませ、どうぞ。４２１円です"
+    },
+    {
+        "prompt": "items: onigiri, potato chips, fruit sando\nて：いらっしゃいませ、どうぞ。４２１円です\nお: はい、現金で",
+        "completion": "て：はい１０２１円お預かりします。６００円のお返しです。"
+    },
+    {
+        "prompt": "items: onigiri, potato chips, fruit sando\nて：いらっしゃいませ、どうぞ。４２１円です\nお: はい、現金で\nて：はい１０２１円お預かりします。６００円のお返しです。\nお：はい",
+        "completion": "て：レシートは大丈夫ですか？"
+    },
+    {
+        "prompt": "items: onigiri, potato chips, fruit sando\nて：いらっしゃいませ、どうぞ。４２１円です\nお: はい、現金で\nて：はい１０２１円お預かりします。６００円のお返しです。\nお：はい\nて：レシートは大丈夫ですか？\nお：あ、要らないです。",
+        "completion": "て：ありがとうございます"
+    },
+    EX3
+    {
+        "prompt": "items: onigiri",
+        "completion": "て：袋に入れますか"
+    },
+    {
+        "prompt": "items: onigiri\nて：袋に入れますか\nお：袋は要らないです。",
+        "completion": "て：はい１０8円でございます。"
+    },
+    EX4
+    {
+        "prompt": "items: cup soup",
+        "completion": "て：えっと、４３２円になります"
+    },
+    {
+        "prompt": "items: cup soup\nて：えっと、４３２円になります\nお：はい、カードで",
+        "completion": "て：スプーンでよろしいですか。"
+    },
+    {
+        "prompt": "items: cup soup\nて：えっと、４３２円になります\nお：はい、カードで\nて：スプーンでよろしいですか。\nお：そうですね",
+        "completion": "て：はい"
+    },
+    EX5
+    {
+        "prompt": "items: katsu curry",
+        "completion": "て：温めどうなさいますか"
+    },
+    {
+        "prompt": "items: katsu curry\nて：温めどうなさいますか\nお：いや、良いです",
+        "completion": "て：失礼いたしました。５３７円になります。"
+    },
+    {
+        "prompt": "items: katsu curry\nて：温めどうなさいますか\nお：いや、良いです\nて：失礼いたしました。５３７円になります。\nお：現金で",
+        "completion": "て：１０００円お預かりします。４６３円のお返しになります"
+    },
+    EX6
+    {
+        "prompt": "items: cigarettes",
+        "completion": "て：いらっしゃいませ"
+    },
+    {
+        "prompt": "items: cigarettes\nて：いらっしゃいませ\nお：えっと、タバコ１２４番",
+        "completion": "て：はい。こちらでよろしいですか。"
+    },
+    {
+        "prompt": "items: cigarettes\nて：いらっしゃいませ\nお：えっと、タバコ１２４番\nて：はい。こちらでよろしいですか。\nお：はい、現金で",
+        "completion": "て：画面タッチをお願いいたします。１０００円お預かりします。５２０円のお返しでございます。ありがとうございます。"
+    },
+    EX7
+    {
+        "prompt": "items: water bottle",
+        "completion": "て：お預かりします。１０８円です。"
+    },
+    {
+        "prompt": "items: water bottle\nて：お預かりします。１０８円です。\nお：はい、現金で",
+        "completion": "て：ポイントカードはお持ちじゃないですか。"
+    },
+    {
+        "prompt": "items: water bottle\nて：お預かりします。１０８円です。\nお：はい、現金で\nて：ポイントカードはお持ちじゃないですか。\nお：いや、ないです。",
+        "completion": "て：はい１１０円お預かりします。２円のお返しとレシートのお返しです。ありがとうございました。"
+    },
+    {
+        "prompt": "items: water bottle\nて：お預かりします。１０８円です。\nお：はい、現金で\nて：ポイントカードはお持ちじゃないですか。\nお：いや、ないです。\nて：はい１１０円お預かりします。２円のお返しとレシートのお返しです。ありがとうございました。\nお：レシートは要らないです。",
+        "completion": "て：あっ、大丈夫ですか？はい、ありがとうございます。"
+    },
+    EX-1
+    {
+        "prompt": "items: coffee",
+        "completion": "て：はい、２２４円でございます"
+    },
+    {
+        "prompt": "items: coffee\nて：はい、２２４円でございます\nお：はい、現金で",
+        "completion": "て：はい、ちょうどいただきます。レシートはご利用ですか。"
+    },
+    {
+        "prompt": "items: coffee\nて：はい、２２４円でございます\nお：はい、現金で\nて：はい、ちょうどいただきます。レシートはご利用ですか。\nお：いや要らないです。",
+        "completion": "て：ありがとうございます。"
+    },
+    EX-2
+    {
+        "prompt": "items: chocolate\nお：すみません",
+        "completion": "て：はい。袋に入れますか。"
+    },
+    {
+        "prompt": "items: chocolate\nお：すみません\nて：はい。袋に入れますか。\nお：お願いします。",
+        "completion": "て：１２９円になります。"
+    },
+    {
+        "prompt": "items: chocolate\nお：すみません\nて：はい。袋に入れますか。\nお：お願いします。\nて：１２９円になります。\nお：はい、現金で",
+        "completion": "て：レシートご利用ですか"
+    },
+    {
+        "prompt": "items: chocolate\nお：すみません\nて：はい。袋に入れますか。\nお：お願いします。\nて：１２９円になります。\nお：はい、現金で\nて：レシートご利用ですか\nお：レシートは要らないです。",
+        "completion": "て：はい、じゃあ１円お返しします。ありがとうございました。"
+    },
+    EX-3
+    {
+        "prompt": "items: onigiri",
+        "completion": "て：テープでよろしいですか？"
+    },
+    {
+        "prompt": "items: onigiri\nて：テープでよろしいですか？\nお：はい",
+        "completion": "て：１０8円です。Tカードは大丈夫ですか？"
+    },
+    {
+        "prompt": "items: onigiri\nて：テープでよろしいですか？\nお：はい\nて：１０8円です。Tカードは大丈夫ですか？\nお：いや　大丈夫です。現金でお願いします",
+        "completion": "て：１０８円ちょうどお預かりいたします。レシートでございます。"
+    },
+    {
+        "prompt": "items: onigiri\nて：テープでよろしいですか？\nお：はい\nて：１０8円です。Tカードは大丈夫ですか？\nお：いや　大丈夫です。現金でお願いします\nて：１０８円ちょうどお預かりいたします。レシートでございます。\nお：あ、要らないです。",
+        "completion": "て：ありがとうございました"
+    },
+    EX-4
+    {
+        "prompt": "items: fruit sando",
+        "completion": "て：袋入れますか"
+    },
+    {
+        "prompt": "items: fruit sando\nて：袋入れますか\nお：要らないです",
+        "completion": "て：３００円になります"
+    },
+    {
+        "prompt": "items: fruit sando\nて：袋入れますか\nお：要らないです\nて：３００円になります\nお：スイカで",
+        "completion": "て：ありがとうございました"
+    },
+    EX-5
+    {
+        "prompt": "items: coffee",
+        "completion": "て：１１３円です。袋お入れしますか"
+    },
+    {
+        "prompt": "items: coffee\nて：１１３円です。袋お入れしますか\nお：袋は要らないです",
+        "completion": "て：テープで失礼します"
+    },
+    {
+        "prompt": "items: coffee\nて：１１３円です。袋お入れしますか\nお：袋は要らないです\nて：テープで失礼します\nお：はい、現金で",
+        "completion": "て：１１３円ちょうどいただきます"
+    },
+    {
+        "prompt": "items: coffee\nて：１１３円です。袋お入れしますか\nお：袋は要らないです\nて：テープで失礼します\nお：はい、現金で\nて：１１３円ちょうどいただきます\nお：はい",
+        "completion": "て：ありがとうございました"
+    },
+    EX-6
+    {
+        "prompt": "items: chocolate",
+        "completion": "て：１９４円でございます。袋にお入れしますか"
+    },
+    {
+        "prompt": "items: chocolate\nて：１９４円でございます。袋にお入れしますか\nお：あ、お願いします",
+        "completion": "て：はい"
+    },
+    {
+        "prompt": "items: chocolate\nて：１９４円でございます。袋にお入れしますか\nお：あ、お願いします\nて：はい\nお：いくらでしたっけ、１００。。",
+        "completion": "て：１９４円"
+    },
+    {
+        "prompt": "items: chocolate\nて：１９４円でございます。袋にお入れしますか\nお：あ、お願いします\nて：はい\nお：いくらでしたっけ、１００。。\nて：１９４円\nお：はい２０４円で",
+        "completion": "て：２０４円お預かりいたします。１０円のお返しです、ありがとうございます。"
+    },
+      
+    EX-7
+    {
+        "prompt": "items: onigiri",
+        "completion": "て：どうぞ。袋入れますか"
+    },
+    {
+        "prompt": "items: onigiri\nて：どうぞ。袋入れますか\nお：袋要らないです。スイカで",
+        "completion": "て：スイカで、１１６円です"
+    },
+    {
+        "prompt": "items: onigiri\nて：どうぞ。袋入れますか\nお：袋要らないです。スイカで\nて：スイカで、１１６円です\nお：はい",
+        "completion": "て：ありがとうございます。またおこしくださいませ"
+    },
+    EX-8
+    {
+        "prompt": "items: onigiri, coffee",
+        "completion": "て：２４８円です"
+    },
+    {
+        "prompt": "items: onigiri, coffee\nて：２４８円です\nお：はい",
+        "completion": "て：袋に入れますか"
+    },
+    {
+        "prompt": "items: onigiri, coffee\nて：２４８円です\nお：はい\nて：袋に入れますか\nお：袋要らないです。はい、現金で",
+        "completion": "て：レシートは"
+    },
+    {
+        "prompt": "items: onigiri, coffee\nて：２４８円です\nお：はい\nて：袋に入れますか\nお：袋要らないです。はい、現金で\nて：レシートは\nお：いいえ、レシート要らないです。",
+        "completion": "て：はいありがとうございます"
+    },
+    EX-9
+    {
+        "prompt": "items: cup ramen",
+        "completion": "て：はい３１５円です。お箸は１ぜんで？"
+    },
+    {
+        "prompt": "items: cup ramen\nて：はい３１５円です。お箸は１ぜんで？\nお：はしは２ぜんお願いします",
+        "completion": "て：はい、じゃあ２ぜん入れておきます"
+    },
+    EX-10
+    {
+        "prompt": "items: cup ramen x2",
+        "completion": "て：３９６円です。おはしは何ぜんで"
+    },
+    {
+        "prompt": "items: cup ramen x2\nて：３９６円です。おはしは何ぜんで\nお：えっと、２ぜん",
+        "completion": "て：はい"
+    },
+    {
+        "prompt": "items: cup ramen x2\nて：３９６円です。おはしは何ぜんで\nお：えっと、２ぜん\nて：はい\nお：現金で",
+        "completion": "て：４００円お預かりいたします。４円のお返しになります。ありがとうございました。"
+    },
+    EX-11
+    {
+        "prompt": "items: katsu curry",
+        "completion": "て：温めどうなさいますか"
+      }
+      {
+        "prompt": "items: katsu curry\nて：温めどうなさいますか\nお：いや、良いです",
+        "completion": "て：はい。お支払いはどうされますか？"
+      }
+      {
+        "prompt": "items: katsu curry\nて：温めどうなさいますか\nお：いや、良いです\nて：はい。お支払いはどうされますか？\nお：現金で",
+        "completion": "て：１０００円からお預かりします。４６０円のお返しです。レシートはご利用ですか？"
+      }
+      {
+        "prompt": "items: katsu curry\nて：温めどうなさいますか\nお：いや、良いです\nて：はい。お支払いはどうされますか？\nお：現金で\nて：１０００円からお預かりします。４６０円のお返しです。レシートはご利用ですか？\nお：いや、良いです",
+        "completion": "て：はい。ありがとうございます。"
+      }
+      
+    EX-12
+    {
+        "prompt": "items: cup soup",
+        "completion": "て：お預かりします。５６１円ちょうだいします。温めますか。"
+    },
+    {
+        "prompt": "items: cup soup\nて：お預かりします。５６１円ちょうだいします。温めますか。\nお：温めはなしで",
+        "completion": "て：はい。お支払いはどうされますか？"
+    },
+    {
+        "prompt": "items: cup soup\nて：お預かりします。５６１円ちょうだいします。温めますか。\nお：温めはなしで\nて：はい。お支払いはどうされますか？\nお：現金で",
+        "completion": "て：はいこちら商品になります。１０００と６１円から。５００円お返しします。あっ、レシートは？"
+    },
+    {
+        "prompt": "items: cup soup\nて：お預かりします。５６１円ちょうだいします。温めますか。\nお：温めはなしで\nて：はい。お支払いはどうされますか？\nお：現金で\nて：はいこちら商品になります。１０００と６１円から。５００円お返しします。あっ、レシートは？\nお：あ、レシートは要らないです。",
+        "completion": "て：ありがとうございます。"
+    },
+    EX-13
+    {
+        "prompt": "items: pasta",
+        "completion": "て：あっためどうなさいますか"
+    },
+    {
+        "prompt": "items: pasta\nて：あっためどうなさいますか\nお：温めなしで",
+        "completion": "て：はいフォークおつけしますか？"
+    },
+    {
+        "prompt": "items: pasta\nて：あっためどうなさいますか\nお：温めなしで\nて：はいフォークおつけしますか？\nお：お願いします。",
+        "completion": "て：３９７円でございます。はいどうぞ。"
+    },
+    {
+        "prompt": "items: pasta\nて：あっためどうなさいますか\nお：温めなしで\nて：はいフォークおつけしますか？\nお：お願いします。\nて：３９７円でございます。はいどうぞ。\nお：PAYS　１０００円",
+        "completion": "て：１０００円からお預かりいたします。はい６０３円お返しします。レシートは大丈夫ですか\nお：レシート要らないです。"
+    },
+    {
+        "prompt": "items: pasta\nて：あっためどうなさいますか\nお：温めなしで\nて：はいフォークおつけしますか？\nお：お願いします。\nて：３９７円でございます。はいどうぞ。\nお：PAYS　１０００円\nて：１０００円からお預かりいたします。はい６０３円お返しします。レシートは大丈夫ですか\nお：レシート要らないです。",
+        "completion": "て：ありがとうございました"
+    },
+      
+    EX-14
+    {
+        "prompt": "items: mapo tofu",
+        "completion": "て：どうぞ、いらっしゃいませ。これ温めますか。"
+    },
+    {
+        "prompt": "items: mapo tofu\nて：どうぞ、いらっしゃいませ。これ温めますか。\nお：温めなしで。",
+        "completion": "て：はい。４５１円でございます。"
+    },
+    {
+        "prompt": "items: mapo tofu\nて：どうぞ、いらっしゃいませ。これ温めますか。\nお：温めなしで。\nて：はい。４５１円でございます。\nお：PAYS１００１円",
+        "completion": "て：はい１００１円お預かりします。５５０円とレシートお返しします。ありがとうございます。"
+    },
+    EX-15
+    {
+        "prompt": "items: katsu curry",
+        "completion": "て：温めどうなさいますか"
+    },
+    {
+        "prompt": "items: katsu curry\nて：温めどうなさいますか\nお：お願いします。現金でお願いします。",
+        "completion": "て：はい。１０００円から。。４６０円のお返しです。温め５０秒ほどお待ちください。"
+    },
+    {
+        "prompt": "items: katsu curry\nて：温めどうなさいますか\nお：お願いします。現金でお願いします。\nて：はい。１０００円から。。４６０円のお返しです。温め５０秒ほどお待ちください。\nお：はい",
+        "completion": "て：はい、お待たせしました"
+    },
+    EX-16
+    {
+        "prompt": "items: udon noodles",
+        "completion": "て：こちらはあっためになりますか"
+    },
+    {
+        "prompt": "items: udon noodles\nて：こちらはあっためになりますか\nお：温め、いや良いです。",
+        "completion": "て：じゃあこちら５４０円ですね。"
+    },
+    {
+        "prompt": "items: udon noodles\nて：こちらはあっためになりますか\nお：温め、いや良いです。\nて：じゃあこちら５４０円ですね。\nお：PAYS５５０円",
+        "completion": "て：５５０円お預かりですね。じゃあ１０円のお返しとレシートですね。ありがとうございます。"
+    },
+    EX-17
+    {
+        "prompt": "items: cigarettes",
+        "completion": "て：はい、おうかがいします。"
+    },
+    {
+        "prompt": "items: cigarettes\nて：はい、おうかがいします。\nお：タバコ１２４番一つ。",
+        "completion": "て：１２４番。メビウスの３ミリボックスで"
+    },
+    {
+        "prompt": "items: cigarettes\nて：はい、おうかがいします。\nお：タバコ１２４番一つ。\nて：１２４番。メビウスの３ミリボックスで\nお：はいそうです",
+        "completion": "て：年齢確認ボタンをお願いします。４８０円です。"
+    },
+    {
+        "prompt": "items: cigarettes\nて：はい、おうかがいします。\nお：タバコ１２４番一つ。\nて：１２４番。メビウスの３ミリボックスで\nお：はいそうです\nて：年齢確認ボタンをお願いします。４８０円です。\nお：PAYS１０００円",
+        "completion": "て：１０００円で。５２０円のお返しです。レシートご利用になりますか。"
+    },
+    EX-18
+    {
+        "prompt": "items: cigarettes",
+        "completion": "て：いらっしゃいませ"
+    },
+    {
+        "prompt": "items: cigarettes\nて：いらっしゃいませ\nお：えっと、タバコ９０番一つ",
+        "completion": "て：はいこちらお間違えないですか"
+    },
+    {
+        "prompt": "items: cigarettes\nて：いらっしゃいませ\nお：えっと、タバコ９０番一つ\nて：はいこちらお間違えないですか\nお：はい",
+        "completion": "て：画面のボタンをタッチをお願いします。ありがとうございます。"
+    },
+    {
+        "prompt": "items: cigarettes\nて：いらっしゃいませ\nお：えっと、タバコ９０番一つ\nて：はいこちらお間違えないですか\nお：はい\nて：画面のボタンをタッチをお願いします。ありがとうございます。\nお：はい",
+        "completion": "て：２てん５８８円になります。"
+    },
+    {
+        "prompt": "items: cigarettes\nて：いらっしゃいませ\nお：えっと、タバコ９０番一つ\nて：はいこちらお間違えないですか\nお：はい\nて：画面のボタンをタッチをお願いします。ありがとうございます。\nお：はい\nて：２てん５８８円になります。\nお：PAYS１０００円",
+        "completion": "て：１０００円からお預かりいたします。４１２円のお返しです。４１２円お確かめください。レシートはよろしいですか？\nお：いや要らないです。\nて：ありがとうございます。"
+    },
+    EX-19
+    {
+        "prompt": "items: bread, beer",
+        "completion": "て：４５１円でございます。年齢確認をお願いいたします。"
+    },
+    {
+        "prompt": "items: bread, beer\nて：４５１円でございます。年齢確認をお願いいたします。\nお：はい。PAYS５００円",
+        "completion": "て：５００円お預かりします。４９円のお返しです。"
+    }
+]
