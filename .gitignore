@@ -171,3 +171,4 @@ cython_debug/
 .pypirc
 
 konbini-bot-3087f5ad646a.json
+.env
